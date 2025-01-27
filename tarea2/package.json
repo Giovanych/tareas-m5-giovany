@@ -1,0 +1,26 @@
+{
+  "name": "proyecto",
+  "version": "1.2.0",
+  "description": "proyecto de estudio y practica",
+  "main": "t2.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "",
+    "watch": "nodemon index.js"
+  },
+  "keywords": [
+    "practica",
+    "repaso",
+    "y",
+    "aprendizaje"
+  ],
+  "author": "Giovany",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "chance": "^1.1.12",
+    "express": "^4.21.2",
+    "nodemon": "^3.1.9",
+    "proyecto": "file:"
+  }
+}
