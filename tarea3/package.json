@@ -1,0 +1,19 @@
+{
+  "name": "tu-proyecto",
+  "version": "1.0.0",
+  "description": "Descripción de tu proyecto",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node init.js",
+    "dev": "nodemon async.js"
+  },
+  "author": "Tu Nombre",
+  "license": "MIT",
+  "dependencies": {
+    "tu-proyecto": "file:"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
