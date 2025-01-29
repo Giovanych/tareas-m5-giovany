@@ -1,0 +1,20 @@
+{
+  "name": "tarea4",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "generate-file": "nodemon generator.js",
+    "find-even-number": "nodemon find.js",
+    "start": "node index.js",
+    "watch": "node --watch index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "giovany",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "tarea4": "file:"
+  }
+}
