@@ -1,9 +1,8 @@
 const http = require("http");
 const fs = require("fs");
 
-const PORT = 3002; // Cambia al puerto que estás usando
+const PORT = 3002;
 
-// Función para leer el archivo JSON
 const readProductsFromFile = () => {
     try {
         const data = fs.readFileSync("products.json", "utf8");
@@ -14,7 +13,6 @@ const readProductsFromFile = () => {
     }
 };
 
-// Función para escribir en el archivo JSON
 const writeProductsToFile = (products) => {
     try {
         fs.writeFileSync("products.json", JSON.stringify(products, null, 2));
@@ -40,7 +38,6 @@ const server = http.createServer((req, res) => {
                 const newProduct = JSON.parse(body);
                 const products = readProductsFromFile();
 
-                // Generar un nuevo ID
                 newProduct.id = products.length ? products[products.length - 1].id + 1 : 1;
 
                 products.push(newProduct);
