@@ -1,0 +1,16 @@
+{
+  "name": "calculadora-nodejs",
+  "version": "1.0.0",
+  "description": "Calculadora básica en Node.js",
+  "main": "calculadora.js",
+  "type": "module",
+  "scripts": {
+    "start": "node calculadora.js"
+  },
+  "keywords": [],
+  "author": "giovany",
+  "license": "ISC",
+  "dependencies": {
+    "calculadora-nodejs": "file:"
+  }
+}
