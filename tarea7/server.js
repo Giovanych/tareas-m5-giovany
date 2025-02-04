@@ -46,7 +46,7 @@ app.get('/students/:id', (req, res) => {
     res.json(student);
 });
 
-// Endpoint DELETE - Eliminar un estudiante
+// Endpoint DELETE 
 app.delete('/students/:id', (req, res) => {
     const students = readStudentsFromFile();
     const studentId = parseInt(req.params.id);
@@ -66,7 +66,7 @@ app.delete('/students/:id', (req, res) => {
 });
 
 
-// Endpoint POST - Agregar un nuevo estudiante
+// Endpoint POST 
 app.post('/students', (req, res) => {
     const students = readStudentsFromFile();
     const { name, age, major } = req.body;
@@ -83,7 +83,7 @@ app.post('/students', (req, res) => {
     res.status(201).json(newStudent);
 });
 
-// Endpoint PUT - Actualizar datos de un estudiante
+// Endpoint PUT 
 app.put('/students/:id', (req, res) => {
     const students = readStudentsFromFile();
     const studentId = parseInt(req.params.id);
