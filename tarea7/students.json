@@ -1,20 +1,32 @@
 [
   {
-    "id": 1,
-    "name": "Alice",
-    "age": 20,
-    "major": "Computer Science"
+    "id": 2,
+    "name": "John",
+    "age": 25,
+    "major": "Engineering"
   },
   {
     "id": 3,
-    "name": "Charlie",
-    "age": 21,
-    "major": "Physics"
+    "name": "John",
+    "age": "five",
+    "major": "Engineering"
   },
   {
     "id": 4,
-    "name": "David",
-    "age": 23,
+    "name": "John",
+    "age": "five",
     "major": "Engineering"
+  },
+  {
+    "id": 5,
+    "name": "John",
+    "age": 30,
+    "major": "Engineering"
+  },
+  {
+    "id": 6,
+    "name": "Alice",
+    "age": 21,
+    "major": "Math"
   }
 ]
