@@ -1,75 +1,92 @@
-# Tarea 7: Crear una API Básica con Express
+# API de Estudiantes con Express
 
-## Descripción
-En esta tarea se desarrolló una API que gestiona una lista de estudiantes utilizando Express como framework de Node.js. La API opera en el puerto 3002 y permite realizar operaciones básicas como obtener todos los estudiantes, obtener un estudiante por ID y eliminar un estudiante.
+## 📌 Descripción
 
-### Funcionalidades principales
+Esta API permite gestionar un listado de estudiantes, permitiendo obtener, crear, actualizar y eliminar estudiantes mediante métodos HTTP. Se utiliza **Node.js** con **Express** y un archivo `students.json` como base de datos.
 
-1. **GET /students**
-   - Este endpoint retorna la lista completa de estudiantes en formato JSON.
-   - Los datos de los estudiantes se obtienen de un archivo JSON llamado `students.json`.
+---
 
-2. **GET /students/:id**
-   - Este endpoint retorna la información de un estudiante específico basado en su ID.
-   - Si no se encuentra un estudiante con el ID proporcionado, se devuelve un mensaje de error con un código de estado 404.
+## 🚀 Ejecución
 
-3. **DELETE /students/:id**
-   - Este endpoint permite eliminar un estudiante específico de la lista basado en su ID.
-   - Si el estudiante no existe, se retorna un mensaje de error con un código de estado 404.
-   - Al eliminar un estudiante, los cambios se guardan de manera persistente en el archivo `students.json`.
-
-### Estructura del proyecto
-- **server.js**: Contiene el código principal del servidor y la lógica para manejar las solicitudes HTTP.
-- **students.json**: Archivo JSON que sirve como base de datos para almacenar la información de los estudiantes.
-
-### Ejemplo del archivo `students.json`
-```json
-[
-    { "id": 1, "name": "Alice", "age": 20, "major": "Computer Science" },
-    { "id": 2, "name": "Bob", "age": 22, "major": "Mathematics" },
-    { "id": 3, "name": "Charlie", "age": 21, "major": "Physics" }
-]
+```sh
+ node server.js
 ```
 
-### Código relevante
-#### Leer los datos del archivo JSON
-```javascript
-const readStudentsFromFile = () => {
-    try {
-        const data = fs.readFileSync(filePath, "utf8").trim();
-        return data ? JSON.parse(data) : [];
-    } catch (err) {
-        console.error("Error leyendo el archivo students.json:", err.message);
-        return [];
-    }
-};
-```
+El servidor se ejecutará en: `http://localhost:3002`
 
-#### Escribir datos en el archivo JSON
-```javascript
-const writeStudentsToFile = (students) => {
-    try {
-        fs.writeFileSync(filePath, JSON.stringify(students, null, 2));
-    } catch (err) {
-        console.error("Error escribiendo en el archivo students.json:", err);
-    }
-};
-```
+URL base: `http://localhost:3002/students`
 
-#### Endpoint DELETE /students/:id
-```javascript
-app.delete('/students/:id', (req, res) => {
-    const students = readStudentsFromFile();
-    const studentId = parseInt(req.params.id);
+---
 
-    const filteredStudents = students.filter(s => s.id !== studentId);
+## 📌 Endpoints de la API
 
-    if (filteredStudents.length === students.length) {
-        return res.status(404).json({ message: "Estudiante no encontrado" });
-    }
+### 🟢 **1. Obtener todos los estudiantes**
 
-    writeStudentsToFile(filteredStudents);
-    res.json({ message: "Estudiante eliminado correctamente" });
-});
-```
+- **Método:** `GET`
+- **URL:** `/students`
+
+---
+
+### 🟢 **2. Obtener un estudiante por ID**
+
+- **Método:** `GET`
+- **URL:** `/students/:id`
+- **Ejemplo:** `/students/2`
+
+---
+
+### 🟢 **3. Crear un nuevo estudiante**
+
+- **Método:** `POST`
+- **URL:** `/students`
+- **Body:** (JSON)
+  ```json
+  {
+    "name": "David",
+    "age": 23,
+    "major": "Engineering"
+  }
+  ```
+---
+
+### 🟢 **4. Actualizar un estudiante**
+
+- **Método:** `PUT`
+- **URL:** `/students/:id`
+- **Body:** (Solo los campos a actualizar)
+  ```json
+  {
+    "age": 24,
+    "major": "Data Science"
+  }
+  ```
+
+---
+
+### 🟢 **5. Eliminar un estudiante**
+
+- **Método:** `DELETE`
+- **URL:** `/students/:id`
+- **Ejemplo:** `/students/2`
+
+---
+
+## 📸 Evidencia de pruebas en Postman
+
+A continuación, se presentan capturas de pantalla de las pruebas realizadas en Postman para verificar el correcto funcionamiento de la API:
+
+### 🔹 **Prueba GET /students**
+![alt text](<metodo GET.jpg>)
+
+### 🔹 **Prueba GET /students/:id**
+![alt text](<GET por ID.jpg>)
+
+### 🔹 **Prueba POST /students**
+![alt text](<Metodo POST.jpg>)
+
+### 🔹 **Prueba PUT /students/:id**
+![alt text](<metodo PUT.jpg>)
+
+### 🔹 **Prueba DELETE /students/:id**
+![alt text](<metodo DELETE.jpg>)
 
