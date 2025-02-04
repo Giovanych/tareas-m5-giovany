@@ -46,22 +46,61 @@ app.get('/students/:id', (req, res) => {
     res.json(student);
 });
 
-// Endpoint DELETE 
+// Endpoint DELETE - Eliminar un estudiante
 app.delete('/students/:id', (req, res) => {
     const students = readStudentsFromFile();
     const studentId = parseInt(req.params.id);
 
-    const filteredStudents = students.filter(s => s.id !== studentId);
+    const studentIndex = students.findIndex(s => s.id === studentId);
 
-    if (filteredStudents.length === students.length) {
+    if (studentIndex === -1) {
         return res.status(404).json({ message: "Estudiante no encontrado" });
     }
 
-    writeStudentsToFile(filteredStudents);
+    // Eliminar estudiante
+    students.splice(studentIndex, 1);
+
+    writeStudentsToFile(students);
 
     res.json({ message: "Estudiante eliminado correctamente" });
 });
 
-app.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+
+// Endpoint POST - Agregar un nuevo estudiante
+app.post('/students', (req, res) => {
+    const students = readStudentsFromFile();
+    const { name, age, major } = req.body;
+
+    if (!name || !age || !major) {
+        return res.status(400).json({ message: "Todos los campos (name, age, major) son obligatorios." });
+    }
+
+    const newId = students.length > 0 ? Math.max(...students.map(s => s.id)) + 1 : 1;
+    const newStudent = { id: newId, name, age, major };
+    students.push(newStudent);
+    writeStudentsToFile(students);
+
+    res.status(201).json(newStudent);
+});
+
+// Endpoint PUT - Actualizar datos de un estudiante
+app.put('/students/:id', (req, res) => {
+    const students = readStudentsFromFile();
+    const studentId = parseInt(req.params.id);
+    const { name, age, major } = req.body;
+
+    const studentIndex = students.findIndex(s => s.id === studentId);
+    
+    if (studentIndex === -1) {
+        return res.status(404).json({ message: "Estudiante no encontrado" });
+    }
+
+    // Actualizar solo los campos proporcionados en la petición
+    if (name) students[studentIndex].name = name;
+    if (age) students[studentIndex].age = age;
+    if (major) students[studentIndex].major = major;
+
+    writeStudentsToFile(students);
+
+    res.json({ message: "Estudiante actualizado", student: students[studentIndex] });
 });
